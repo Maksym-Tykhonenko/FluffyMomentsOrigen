@@ -3,7 +3,7 @@ workflows:
     name: Fluffy Moments
     max_build_duration: 120
     integrations:
-      app_store_connect: FluffyMomentsCodemagic
+      app_store_connect: FluffyMomentApiNew
     environment:
       ios_signing:
         distribution_type: app_store
