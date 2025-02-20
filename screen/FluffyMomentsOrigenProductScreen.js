@@ -128,7 +128,7 @@ const FluffyMomentsOrigenProductScreen = ({navigation, route}) => {
   const handleNavigationStateChange = navState => {
     const {url} = navState;
     const {mainDocumentURL} = navState;
-    //console.log('NavigationState: ', navState);
+    console.log('NavigationState: ', navState);
     if (
       url.includes(
         'https://api.paymentiq.io/paymentiq/api/piq-redirect-assistance',
@@ -175,17 +175,26 @@ const FluffyMomentsOrigenProductScreen = ({navigation, route}) => {
       //Linking.openURL(url);
       //return false;
       return; // Дозволити навігацію для цих URL-адрес
-    } else if (mainDocumentURL === 'https://winspirit.best/') {
+    } else if (
+      mainDocumentURL === 'https://winspirit.best/' ||
+      url.includes('https://malinacasino') ||
+      url.includes('https://dazardbet3.com') ||
+      url.includes('https://ninlay')
+    ) {
       // Умова для ввімкнення/вимкнення onOpenWindow
       setEnableOnOpenWindow(true);
-    } else {
+    } //else if (url.includes('nl-snsbank-sign:')) {
+    //Linking.openURL(url);
+    //console.log('Linking.openURL');
+    //}
+    else {
       setEnableOnOpenWindow(false);
     }
   };
 
   const onShouldStartLoadWithRequest = event => {
     const {url} = event;
-    //console.log('onShouldStartLoadWithRequest========> ', event);
+    console.log('onShouldStartLoadWithRequest========> ', event);
 
     if (url.startsWith('mailto:')) {
       Linking.openURL(url);
@@ -214,15 +223,7 @@ const FluffyMomentsOrigenProductScreen = ({navigation, route}) => {
     ) {
       Linking.openURL(url);
       return false; // && checkNineUrl === product
-    } //else if (url.includes('pay.skrill.com')) {
-    //console.log('Hello!!!!!!!!!!!!!!!!!!!!!');
-    //Linking.openURL(url);
-    //refWebview.current.injectJavaScript(
-    //  `window.location.href = '${redirectUrl}'`,
-    //);
-    //return false;
-    //}
-    else if (url.includes('https://gatewaynpay.com/gateway/')) {
+    } else if (url.includes('https://gatewaynpay.com/gateway/')) {
       console.log('Hello!!!!!!!!!!!!!!!!!!!!!');
       Linking.openURL(url);
       refWebview.current.injectJavaScript(
@@ -267,13 +268,7 @@ const FluffyMomentsOrigenProductScreen = ({navigation, route}) => {
         `window.location.href = '${redirectUrl}'`,
       );
       return false;
-    } //else if (url.includes('https://gate.mrbl.cc/payments/process/')) {
-    //refWebview.current.injectJavaScript(
-    //  `window.location.href = 'https://pay.neosurf.com/'`,
-    //);
-    //return false;
-    //}
-    else if (url.includes('secure.livechatinc.com/customer/action/')) {
+    } else if (url.includes('secure.livechatinc.com/customer/action/')) {
       //refWebview?.current?.goBack();
       return false;
     } else if (url.startsWith('bncmobile://')) {
@@ -281,6 +276,62 @@ const FluffyMomentsOrigenProductScreen = ({navigation, route}) => {
       console.log('Перехоплений URL:', url);
       Alert.alert(`Wait a few seconds, the loading process is underway...`);
       // Ви можете використати Linking для обробки
+      Linking.openURL(url).catch(err => {
+        //console.error('Помилка при відкритті URL:', err);
+      });
+
+      return false; // Забороняємо WebView завантажувати цей URL
+    } else if (url.startsWith('nl.abnamro.deeplink.psd2.consent://')) {
+      /////
+      Linking.openURL(url).catch(err => {
+        //console.error('Помилка при відкритті URL:', err);
+      });
+
+      return false; // Забороняємо WebView завантажувати цей URL
+    } else if (url.includes('snsbank.nl')) {
+      Linking.openURL('nl-snsbank-sign://').catch(err => {
+        //console.error('Помилка при відкритті URL:', err);
+      });
+
+      return false; // Забороняємо WebView завантажувати цей URL
+    } else if (url.includes('asnbank.nl')) {
+      ///////////////////////////////////
+      Linking.openURL('nl-asnbank-sign://').catch(err => {
+        //console.error('Помилка при відкритті URL:', err);
+      });
+
+      return false; // Забороняємо WebView завантажувати цей URL
+    } else if (url.includes('nl.rabobank.openbanking')) {
+      Linking.openURL('nl.rabobank.openbanking://').catch(err => {
+        //console.error('Помилка при відкритті URL:', err);
+      });
+
+      return false; // Забороняємо WebView завантажувати цей URL
+    } else if (url.includes('revolut')) {
+      Linking.openURL('revolut://').catch(err => {
+        //console.error('Помилка при відкритті URL:', err);
+      });
+
+      return false; // Забороняємо WebView завантажувати цей URL
+    } else if (url.includes('myaccount.ing.com')) {
+      Linking.openURL(url).catch(err => {
+        //console.error('Помилка при відкритті URL:', err);
+      });
+
+      return false; // Забороняємо WebView завантажувати цей URL
+    } else if (url.includes('bankieren.rabobank.nl')) {
+      Linking.openURL(url).catch(err => {
+        //console.error('Помилка при відкритті URL:', err);
+      });
+
+      return false; // Забороняємо WebView завантажувати цей URL
+    } else if (url.includes('regiobank.nl')) {
+      Linking.openURL(url).catch(err => {
+        //console.error('Помилка при відкритті URL:', err);
+      });
+
+      return false; // Забороняємо WebView завантажувати цей URL
+    } else if (url.includes('regiobank.nl')) {
       Linking.openURL(url).catch(err => {
         //console.error('Помилка при відкритті URL:', err);
       });
